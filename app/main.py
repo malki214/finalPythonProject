@@ -15,18 +15,20 @@ async def check_if_alive():
 
 @app.post('/analyze')
 async def graphs(file: file.File):
-    open_file(file)
+    init()
+    open_directory(file.path)
     img = Image.open(histogram_functions_lengths(file.path))
     img.show()
     img = Image.open(number_problems_for_each_problem_type(file.path))
     img.show()
-    img = Image.open(number_problem_per_file(file))
+    img = Image.open(number_problem_per_file(file.path))
     img.show()
     return f'{file.path}\images'
 
 @app.post('/alerts')
 async def alerts(file: file.File):
-    open_file(file)
+    init()
+    open_directory(file.path)
     arr_alerts = []
     arr_alerts.append(check_over_20_lines())
     arr_alerts.append(check_file_over_200_lines())
