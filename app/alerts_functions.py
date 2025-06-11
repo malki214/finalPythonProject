@@ -67,7 +67,7 @@ def check_over_20_lines():
     arr_warnings = []
     for function_name, length in lengths.items():
         if length > 20:
-            arr_warnings.append(f"Warning: The length of function '{function_name}' is {length}!! greater than 20!")
+            arr_warnings.append(f"Warning: The length of function '{function_name}' is {length}!! greater than 20!\n")
             file_name = function_name.split(':')[0]
             count_warn_per_file[file_name] = count_warn_per_file[file_name] + 1 if file_name in count_warn_per_file.keys() else 1
 
@@ -80,7 +80,7 @@ def check_file_over_200_lines():
         line_count = source_code.count('\n') + 1
         if line_count > 200:
             count_warn_per_file[name] = count_warn_per_file[name] + 1 if  name in count_warn_per_file.keys() else 1
-            arr_warnings.append(f"Warning: The length of file {name} is {line_count} - greater than 200!")
+            arr_warnings.append(f"Warning: The length of file {name} is {line_count} - greater than 200!\n")
     arr_warnings.sort()
     return arr_warnings
 
@@ -103,7 +103,7 @@ def find_unused_variables():
     # התרעה עבור כל משתנה לא בשימוש
     arr_warnings = []
     for var in unused_variables:
-        arr_warnings.append(f"Warning: Variable '{var}' is assigned but not used.")
+        arr_warnings.append(f"Warning: Variable '{var}' is assigned but not used.\n")
         file_name = var.split(':')[0]
         count_warn_per_file[file_name] = count_warn_per_file[file_name] + 1 if file_name in count_warn_per_file.keys() else 1
     arr_warnings.sort()
@@ -116,7 +116,7 @@ def find_functions_without_docstrings():
         for node in ast.walk(tree):
             if isinstance(node, ast.FunctionDef):
                 if ast.get_docstring(node) is None:
-                    warnings_functions_without_docstrings.append(f"Warning: Function '{file_name}: {node.name}' has no documentation.")
+                    warnings_functions_without_docstrings.append(f"Warning: Function '{file_name}: {node.name}' has no documentation.\n")
                     count_warn_per_file[file_name] = count_warn_per_file[file_name] + 1 if file_name in count_warn_per_file.keys() else 1
 
     warnings_functions_without_docstrings.sort()
@@ -125,12 +125,12 @@ def find_functions_without_docstrings():
 def get_count_warn_per_file():
     return count_warn_per_file
 
-def init():
-    init_count_warn_per_file()
+def clear_objects():
+    clear_count_warn_per_file()
     source_codes.clear()
     trees.clear()
 
-def init_count_warn_per_file():
+def clear_count_warn_per_file():
     count_warn_per_file.clear()
 
 if __name__ == '__main__':
@@ -145,13 +145,13 @@ if __name__ == '__main__':
     # for key,value in source_codes.items():
     #     print(key + ":")
     #     print(value)
-    print(check_over_20_lines())
-    print(check_file_over_200_lines())
-    print(find_unused_variables())
+    # print(check_over_20_lines())
+    # print(check_file_over_200_lines())
+    # print(find_unused_variables())
     print(find_functions_without_docstrings())
-    for key,value in count_warn_per_file.items():
-        print(key + ":")
-        print(value)
+    # for key,value in count_warn_per_file.items():
+    #     print(key + ":")
+    #     print(value)
     # length = get_functions_lengths()
     # print(length)
 
