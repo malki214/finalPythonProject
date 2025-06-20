@@ -1,6 +1,6 @@
 
 from fastapi import FastAPI,HTTPException
-from fastapi.responses import HTMLResponse
+from fastapi.responses import HTMLResponse, JSONResponse
 from alerts_functions import *
 from graphs_functions import *
 from models import file
@@ -43,8 +43,8 @@ async def graphs(file: file.File):
     with open(html_file_path, "w") as html_file:
         html_file.write(html_content)
 
-    # return {"link": "/output"}
-    return "http://localhost:8000/output"
+    return "You can see the graphs at this link: http://localhost:8000/output"
+    # return "http://localhost:8000/output"
 
 @app.get("/output", response_class=HTMLResponse)
 async def get_html():
