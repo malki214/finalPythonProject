@@ -65,7 +65,7 @@ async def alerts(file: file.File):
     return ''.join(arr_alerts)
 
 if __name__ == '__main__':
-    import uvicorn
-    uvicorn.run('main:app', host='localhost', port=8000)
     if not os.path.exists("images"):
         os.mkdir("images")
+    import uvicorn
+    uvicorn.run('main:app', host='localhost', port=8000)
