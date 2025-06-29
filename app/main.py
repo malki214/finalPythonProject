@@ -30,14 +30,13 @@ async def graphs(file: file.File):
     number_problems_for_each_problem_type()
     number_problem_per_file()
 
-    html_content = "<html><body><h1>graphs</h1>"
+    html_content = "<html><head><title>Code Analysis Graphs</title><style>body {background-color: #f0f4f8;font-family: Arial, sans-serif;text-align: center;padding: 30px;}h1 {color: #333;margin-bottom: 40px;}.image-container {display: flex;justify-content: center; flex-wrap: wrap; gap: 20px;}.image-container img {max-width: 400px;width: 100%;height: auto;border: 2px solid #ccc; border-radius: 10px;background: white;padding: 10px;box-shadow: 2px 2px 12px rgba(0,0,0,0.15);}</style></head><body><h1>Code Analysis Graphs</h1><div class='image-container'>"
     images = os.listdir("./images")
     for image in images:
         if image != "output.html":
-            # השתמש בנתיב סטטי לתמונה
             image_path = f"/images/{image}"
-            html_content += f'<img src="{image_path}" alt="Image"><br>'
-    html_content += "</body></html>"
+            html_content += f'<img src="{image_path}" alt=f"{image}"><br>'
+    html_content += "</div></body></html>"
 
     html_file_path = "./images/output.html"
     with open(html_file_path, "w") as html_file:
